@@ -17,6 +17,31 @@ typedef struct	grille
 	unsigned	time_gain;
 }				grille;
 
+typedef struct position
+{
+	unsigned	x;
+	unsigned	y;
+}				position;
+
+int		recv_pos(unsigned *x)
+{
+	int	ret;
+
+	fprintf(stderr, "Waiting for position...\n");
+
+	ret = fscanf(stdin, "%u", x);
+	ret = ret != 1;
+
+	if (ret != 0)
+		fprintf(stderr, "Invalid position!\n");
+	return ret;
+}
+
+int		send_pos(unsigned x)
+{
+	return fprintf(stdout, "%u\n", x) == -1;
+}
+
 int	place(grille *grid, unsigned x, char player)
 {
 	unsigned	y;
@@ -78,21 +103,36 @@ int	setup(grille *grid)
 
 int main(void)
 {
-	grille  grid;
+	grille  	grid;
+	int			ret;
+	unsigned	x;
 
-	setup(&grid);
+	ret = setup(&grid);
 
-	place(&grid, 0, 'X');
-	place(&grid, 0, 'X');
-	place(&grid, 0, 'X');
-	place(&grid, 0, 'X');
-	place(&grid, 0, 'X');
-	place(&grid, 0, 'X');
-	place(&grid, 1, 'X');
+	if (ret == 0)
+	{
+		if (grid.player_b_starts)
+		{
+			ret = recv_pos(&x);
+			place(&grid, x, 'O');
+			print_grid(&grid);
+		}
+		while (ret == 0)
+		{
+			// TODO: Get best move
+			send_pos(x);
+			//if (ret == 0)
+			{
+				place(&grid, x, 'X');
+				print_grid(&grid);
 
-	print_grid(&grid);
-
-	clear_grid(&grid);
+				ret = recv_pos(&x);
+				place(&grid, x, 'O');
+				print_grid(&grid);
+			}
+		}
+		clear_grid(&grid);
+	}
 
 	return 0;
 }
