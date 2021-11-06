@@ -6,7 +6,7 @@
 #    By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 13:22:25 by iel-amra          #+#    #+#              #
-#    Updated: 2021/11/06 20:58:11 by iel-amra         ###   ########lyon.fr    #
+#    Updated: 2021/11/06 21:04:23 by iel-amra         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,10 @@ SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
-	ar -rc $(NAME) $(OBJ)
+	gcc -o $(NAME) $(OBJ)
 
 %o : %c
-	gcc -Werror -Wall -Wextra -o $(NAME) $<
+	gcc -c -Werror -Wall -Wextra $<
 
 clean :
 	rm -f *.o
