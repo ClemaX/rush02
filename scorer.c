@@ -6,7 +6,7 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:55:12 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/07 12:47:27 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 14:47:51 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,18 @@ int	score_jeton(plateau grille, int pos)
 	int	score_jeton;
 
 	score_jeton = 0;
-	i = 0;
+	i = -1;
 	while (i <= 1)
 	{
 		j = 0;
 		while (j <= 1)
 		{
-			if (i == 0 && j == 0)
+			if ((i == 0 && j == 0) || (i == -1 && j == 0))
 				j++;
 			void_count = void_sniper(grille, pos, i, j);
 			void_count += void_sniper(grille, pos, i * -1, j * -1);
+			ft_putnbr_fd(void_count, 1);
+			write(1, "\n", 1);
 			if (void_count >= 3)
 			{
 				same_count = same_sniper(grille, pos, i, j);
@@ -93,7 +95,7 @@ int	score_jeton(plateau grille, int pos)
 		}
 		i++;
 	}
-	if (grille.tab[pos] == '0')
+	if (grille.tab[pos] == 'O')
 		score_jeton *= -1;
 	return (score_jeton);
 }
@@ -163,7 +165,11 @@ void	print_plat(plateau grille)
 
 int main()
 {
-	plateau grille = init_plat(10, 5);
+	plateau grille = init_plat(7, 4);
+	grille.tab[2] = 'X';
+	grille.tab[1] = 'O';
+	grille.tab[9] = 'O';
+	ft_putnbr_fd(score_jeton(grille, 9), 1);
 	print_plat(grille);
 	return (0);
 }
