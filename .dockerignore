@@ -1,0 +1,7 @@
+*.o
+*.out
+rush02
+.gitignore
+creator.sh
+header.sh
+Dockerfile
