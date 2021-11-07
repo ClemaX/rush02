@@ -6,11 +6,11 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 11:19:58 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/05 15:52:14 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 15:26:27 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rush02.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

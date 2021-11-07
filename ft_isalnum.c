@@ -6,11 +6,11 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 08:31:54 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/04 13:43:47 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 15:23:45 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rush02.h"
 
 int	ft_isalnum(int c)
 {

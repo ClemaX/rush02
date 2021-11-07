@@ -6,11 +6,11 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:08:39 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/04 18:16:42 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 15:25:50 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rush02.h"
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {

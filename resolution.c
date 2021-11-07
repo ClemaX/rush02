@@ -6,7 +6,7 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 10:52:06 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/07 14:29:42 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 19:11:54 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ plateau	init_plat(int x, int y)
 		plateau grille;
 		grille.x = x;
 		grille.y = y;
+		grille.score = 0;
 		grille.tab = malloc((x * y + 1) * sizeof(char));
 		grille.tab[x * y] = '\0'; 
 		ft_memset(grille.tab, '_', x * y);
@@ -35,45 +36,48 @@ plateau	clone(plateau grille)
 	return (grille2);
 }
 
-int	init_score_pref(char joueur)
+int	init_score_pref(char joueur2)
 {
 	int	score_pref;
 
-	if (joueur == 'X')
+	if (joueur2 == 'X')
 		score_pref = INT_MIN;
 	else
 		score_pref = INT_MAX;
 	return (score_pref);
 }
-/*
-int	blob(plateau grille, char joueur, int coups)
+
+int	blob(plateau grille, char joueur, int coups, int n)
 {
 	int		i;
+	int		pos;
 	int		score;
 	int 	score_pref;
 	char	joueur2;
 	plateau	grille2;
 
+	grille2 = clone(grille);
+	pos = place(&grille2, n, joueur);
+	if (pos != -1)
+		grille2.score = scorer(grille, grille2, pos);
+	else
+		return(-7000);
+	print_grid(&grille2);
+	ft_putnbr_fd(grille2.score, 1);
+	write(1, "\n\n", 1);
 	i = 0;
-	score_pref = init_score_pref(joueur);
-	joueur2 = 167 - (int)joueur; // Inverse le cod ascii des caracteres
-	while (i < grille.x)
-	{
-		if (coups > 1)
-		{
-			grille2 = clone(grille);
-			place(&grille2, i, joueur);
-			score = blob(grille2, joueur2, coups - 1);
-			free(grille2.tab);
-		}
-		else
-			score = scorer(grille, grille2, i);
+	joueur2 = 167 - (int)joueur; // Inverse le code ascii des caracteres
+	score_pref = init_score_pref(joueur2);
+	while (i < grille.x && coups > 0)
+	{	
+		score = blob(grille2, joueur2, coups - 1, i);
+		if (joueur2 == 'X' && score_pref < score)
+			score_pref = score;
+		if (joueur2 == 'O' && score_pref > score)
+			score_pref = score;
 		i++;
-
-		if (joueur == 'X' && score_pref < score)
-			score_pref = score;
-		if (joueur == 'O' && score_pref > score)
-			score_pref = score;
 	}
+	if (coups == 0)
+		return (grille2.score);
 	return (score_pref);
-} */
+}

@@ -6,11 +6,11 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 09:50:54 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/05 19:31:45 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 15:23:26 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rush02.h"
 
 void	ft_bzero(void *s, size_t n)
 {

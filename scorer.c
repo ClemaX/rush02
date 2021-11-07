@@ -6,12 +6,44 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:55:12 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/07 14:47:51 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 18:06:54 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush02.h"
+#include "stdio.h"
 #include <math.h>
+
+#define GRID_EMPTY '_'
+#define GRID_PLAYER_A 'X'
+#define GRID_PLAYER_B 'O'
+
+int    place(plateau *grid, int x, char player)
+{
+    int	y;
+    int	pos;
+
+    for (y = 0; y < grid->y && grid->tab[grid->x * y + x] != GRID_EMPTY; y++)
+        ;
+
+    if (y < grid->y)
+    {
+        pos = grid->x * y + x;
+        grid->tab[pos] = player;
+        //fprintf(stderr, "Placed %c at %u %u!\n", player, x, y);
+    }
+    else
+        pos = -1;
+
+    return pos;
+}
+
+void    print_grid(plateau *grid)
+{
+    for (int y = grid->y - 1; y >= 0; y--)
+        fprintf(stderr, "%.*s|\n", grid->x, grid->tab + grid->x * y);
+}
+
 
 int	void_sniper(plateau grille, int pos, int i, int j)
 {
@@ -72,6 +104,18 @@ int	score_jeton(plateau grille, int pos)
 	int	same_count;
 	int	score_jeton;
 
+	if (grille.tab[pos] != 'X' && grille.tab[pos] != 'O')
+	{
+		write(1, "\n", 1);
+		ft_putendl_fd("ERROR SCORE_JETON", 1);
+		ft_putstr_fd("At pos = ", 1);	
+		ft_putnbr_fd(pos, 1);
+		ft_putstr_fd(" and char = ", 1);
+		write(1, grille.tab + pos, 1);
+		write(1, "\n", 1);
+		print_grid(&grille);
+		ft_putendl_fd("Grid Error End", 1);
+	}
 	score_jeton = 0;
 	i = -1;
 	while (i <= 1)
@@ -83,13 +127,11 @@ int	score_jeton(plateau grille, int pos)
 				j++;
 			void_count = void_sniper(grille, pos, i, j);
 			void_count += void_sniper(grille, pos, i * -1, j * -1);
-			ft_putnbr_fd(void_count, 1);
-			write(1, "\n", 1);
 			if (void_count >= 3)
-			{
+			{	
 				same_count = same_sniper(grille, pos, i, j);
 				same_count += same_sniper(grille, pos, i * -1, j * -1);
-				score_jeton += (10 + (void_count - 3) * 2) * pow(2, same_count);
+				score_jeton += (10 + (void_count - 3) * 2) * pow(2, same_count);	
 			}
 			j++;
 		}
@@ -108,8 +150,8 @@ int	sniper(plateau grille, int pos, int i, int j)
 	int	x;
 	int	y;
 
-	y = pos / grille.x + i;
-	x = pos % grille.x + j;
+	y = (pos / grille.x) + j;
+	x = (pos % grille.x) + i;
 	while (x < grille.x && x >= 0 && y < grille.y && y >= 0 
 			&& grille.tab[y * grille.x + x] == '_')
 	{
@@ -117,7 +159,7 @@ int	sniper(plateau grille, int pos, int i, int j)
 		y += j;
 	}
 	if (x < grille.x && x >= 0 && y < grille.y && y >= 0)	
-		return (pos);
+		return (y * grille.x + x);
 	return (-1);
 }
 
@@ -138,12 +180,13 @@ int	scorer(plateau grille, plateau grille2, int pos)
 				j++;
 			sniped_jeton = sniper(grille2, pos, i, j);
 			if (sniped_jeton != -1)
-			{
+			{	
 				grille2.score -= score_jeton(grille, sniped_jeton);
 				grille2.score += score_jeton(grille2, sniped_jeton);
 			}
 			j++;
 		}
+		i++;
 	}
 	return (grille2.score);
 }
@@ -163,13 +206,3 @@ void	print_plat(plateau grille)
 	write (1, "\n\n", 2);
 }
 
-int main()
-{
-	plateau grille = init_plat(7, 4);
-	grille.tab[2] = 'X';
-	grille.tab[1] = 'O';
-	grille.tab[9] = 'O';
-	ft_putnbr_fd(score_jeton(grille, 9), 1);
-	print_plat(grille);
-	return (0);
-}
