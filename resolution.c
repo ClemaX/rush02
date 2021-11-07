@@ -6,21 +6,20 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 10:52:06 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/06 20:15:35 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 12:38:22 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush02.h"
-#include "libft.h"
 
-plateau	init_tab(char *tab, int x, int y)
+plateau	init_plat(int x, int y)
 {
 		plateau grille;
 		grille.x = x;
 		grille.y = y;
 		grille.tab = malloc((x * y + 1) * sizeof(char));
 		grille.tab[x * y] = '\0'; 
-		ft_memset(grille.tab, '_', y);
+		ft_memset(grille.tab, '_', x * y);
 		return (grille);
 }
 
@@ -43,7 +42,7 @@ int	init_score_pref(char joueur)
 		score_pref = 2147483647;
 	return (score_pref);
 }
-
+/*
 int	blob(plateau grille, char joueur, int coups)
 {
 	int		i;
@@ -54,7 +53,7 @@ int	blob(plateau grille, char joueur, int coups)
 
 	i = 0;
 	score_pref = init_score_pref(joueur);
-	joueur2 = 9 - (int)joueur + 158; // Inverse le cod ascii des caracteres
+	joueur2 = 167 - (int)joueur; // Inverse le cod ascii des caracteres
 	while (i < grille.x)
 	{
 		if (coups > 1)
@@ -75,4 +74,4 @@ int	blob(plateau grille, char joueur, int coups)
 			score_pref = score;
 	}
 	return (score_pref);
-}
+} */

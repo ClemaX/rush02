@@ -6,40 +6,96 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:55:12 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/06 20:43:47 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 12:47:27 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush02.h"
-#include "libft.h"
+#include <math.h>
 
 int	void_sniper(plateau grille, int pos, int i, int j)
 {
 	int		x;
 	int		y;
+	int		nb_void;
 	char	joueur2;
+	char 	joueur;
 
-
-	joueur2 = 9 - (int)grille.tab[pos] + 158; // Inverse le code ascii des caracteres
+	nb_void = 0;
+	joueur = grille.tab[pos];
+	joueur2 = 167 - (int)joueur; // Inverse le code ascii des caracteres
 	y = pos / grille.x;
 	x = pos % grille.x;
 	while (x + i < grille.x && x + i >= 0 && y + j < grille.y && y + j >= 0 
 			&& grille.tab[(y + j) * grille.x + x + i] != joueur2)
-
 	{
 		x += i;
 		y += j;
+		nb_void++;
 	}
-	return (grille.x - x);
+	return (nb_void);
+}
+
+int	same_sniper(plateau grille, int pos, int i, int j)
+{
+	int		x;
+	int		y;
+	int		nb_same;
+	int		nb_cases;
+	char	joueur2;
+	char 	joueur;
+
+	nb_same = 0;
+	nb_cases = 0;
+	joueur = grille.tab[pos];
+	joueur2 = 167 - (int)joueur; // Inverse le code ascii des caracteres
+	y = pos / grille.x;
+	x = pos % grille.x;
+	while (x + i < grille.x && x + i >= 0 && y + j < grille.y && y + j >= 0
+			&& grille.tab[(y + j) * grille.x + x + i] != joueur2
+			&& nb_cases < 4)
+	{
+		if (grille.tab[(y + j) * grille.x + x + i] == joueur)
+			nb_same++;
+		x += i;
+		y += j;
+		nb_cases++;
+	}
+	return (nb_same);
 }
 
 int	score_jeton(plateau grille, int pos)
 {
-	int	x;
-	int	y;
+	int i;
+	int	j;
+	int	void_count;
+	int	same_count;
+	int	score_jeton;
 
-	y = pos / grille.x;
-	x = pos % grille.x;
+	score_jeton = 0;
+	i = 0;
+	while (i <= 1)
+	{
+		j = 0;
+		while (j <= 1)
+		{
+			if (i == 0 && j == 0)
+				j++;
+			void_count = void_sniper(grille, pos, i, j);
+			void_count += void_sniper(grille, pos, i * -1, j * -1);
+			if (void_count >= 3)
+			{
+				same_count = same_sniper(grille, pos, i, j);
+				same_count += same_sniper(grille, pos, i * -1, j * -1);
+				score_jeton += (10 + (void_count - 3) * 2) * pow(2, same_count);
+			}
+			j++;
+		}
+		i++;
+	}
+	if (grille.tab[pos] == '0')
+		score_jeton *= -1;
+	return (score_jeton);
 }
 
 
@@ -86,4 +142,26 @@ int	scorer(plateau grille, plateau grille2, int pos)
 		}
 	}
 	return (grille2.score);
+}
+
+void	print_plat(plateau grille)
+{
+	int	i;
+
+	i = 0;
+	while (grille.tab[i])
+	{	
+		if (i % grille.x == 0)
+			write (1, "\n", 1);
+		write(1, grille.tab + i, 1);
+		i++;
+	}
+	write (1, "\n\n", 2);
+}
+
+int main()
+{
+	plateau grille = init_plat(10, 5);
+	print_plat(grille);
+	return (0);
 }
