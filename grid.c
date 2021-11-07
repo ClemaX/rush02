@@ -9,7 +9,7 @@ int		place(plateau *grid, int x, char player)
 	int	y;
 	int	pos;
 
-	if (x > 0 && x < grid->x)
+	if (x >= 0 && x < grid->x)
 	{
 		for (y = 0; y < grid->y && grid->tab[grid->x * y + x] != GRID_EMPTY; y++)
 			;
@@ -33,7 +33,7 @@ int		unplace(plateau *grid, int x)
 	int	y;
 	int	pos;
 
-	if (x > 0 && x < grid->x)
+	if (x >= 0 && x < grid->x)
 	{
 		for (y = 0; y < grid->y && grid->tab[grid->x * y + x] != GRID_EMPTY; y++)
 			;

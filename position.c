@@ -2,13 +2,19 @@
 
 #include "rush02.h"
 
+#include <unistd.h>
+
+#include "libft.h"
+
 int		recv_pos(int *x)
 {
-	int	ret;
+	int		ret = 1;
+
 
 	fprintf(stderr, "Waiting for position...\n");
 
 	ret = fscanf(stdin, "%u", x);
+	fprintf(stderr, "Received position %d...\n", *x);
 	ret = ret != 1;
 
 	if (ret != 0)
@@ -18,5 +24,10 @@ int		recv_pos(int *x)
 
 int		send_pos(int x)
 {
-	return fprintf(stdout, "%u\n", x) == -1;
+	fprintf(stderr, "Sending %u...\n", x);
+
+	fprintf(stdout, "%u\n", x);
+
+	fflush(stdout);
+	return 0;
 }

@@ -10,7 +10,7 @@ int	setup(plateau *grid)
 
 	ret = fscanf(stdin, "%u\n%u\n%u\n%u\n%u\n%u",
 		&grid->x, &grid->y,
-		&grid->win_length, &grid->player_b_starts,
+		&grid->win_length, &grid->player_turn,
 		&grid->time_gain, &grid->total_time);
 
 	if (ret == 6)

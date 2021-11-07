@@ -15,6 +15,8 @@
 # define GRID_EMPTY '_'
 # define GRID_PLAYER_A 'X'
 # define GRID_PLAYER_B 'O'
+# define TURN_PLAYER_A 1
+# define TURN_PLAYER_B 2
 
 # define BLOB_RESOLUTION 3
 
@@ -25,7 +27,7 @@ typedef struct	plt
 	int			y;
 	int			score;
 	unsigned	win_length;
-	unsigned	player_b_starts;
+	unsigned	player_turn;
 	unsigned	total_time;
 	unsigned	time_gain;
 }				plateau;
