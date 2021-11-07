@@ -6,11 +6,11 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 17:52:15 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/05 20:32:52 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 15:26:46 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rush02.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

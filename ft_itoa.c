@@ -6,11 +6,11 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 16:34:26 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/05 11:46:51 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 15:24:11 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rush02.h"
 
 int	len_integer(int n)
 {
