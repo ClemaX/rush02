@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rush02.h"
-#include "libft.h"
 #include <limits.h>
 
 /* 
@@ -62,9 +61,6 @@ int	blob(plateau grille, char joueur, int coups, int n)
 		grille2.score = scorer(grille, grille2, pos);
 	else
 		return(-7000);
-	print_grid(&grille2);
-	ft_putnbr_fd(grille2.score, 1);
-	write(1, "\n\n", 1);
 	i = 0;
 	joueur2 = 167 - (int)joueur; // Inverse le code ascii des caracteres
 	score_pref = init_score_pref(joueur2);

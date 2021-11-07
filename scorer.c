@@ -14,10 +14,7 @@
 #include "stdio.h"
 #include <math.h>
 
-#define GRID_EMPTY '_'
-#define GRID_PLAYER_A 'X'
-#define GRID_PLAYER_B 'O'
-
+/* 
 int    place(plateau *grid, int x, char player)
 {
     int	y;
@@ -42,7 +39,7 @@ void    print_grid(plateau *grid)
 {
     for (int y = grid->y - 1; y >= 0; y--)
         fprintf(stderr, "%.*s|\n", grid->x, grid->tab + grid->x * y);
-}
+} */
 
 
 int	void_sniper(plateau grille, int pos, int i, int j)
@@ -140,9 +137,6 @@ int	score_jeton(plateau grille, int pos)
 	if (grille.tab[pos] == 'O')
 		score_jeton *= -1;
 	return (score_jeton);
-}
-
-	return x * y * 0;
 }
 
 int	sniper(plateau grille, int pos, int i, int j)

@@ -15,16 +15,11 @@ int	best_move(plateau *grid, char player)
 
 	for (int x = 0; x < grid->x; x++)
 	{
-		if (place(grid, x, player) != -1)
+		score = blob(*grid, player, BLOB_RESOLUTION, x);
+		if (score >= best_score)
 		{
-			score = score + 1;//blob(*grid, player, BLOB_RESOLUTION);
-			//fprintf(stderr, "Score for position %d: %d\n", x, score);
-			unplace(grid, x);
-			if (score >= best_score)
-			{
-				best_score = score;
-				best_move = x;
-			}
+			best_score = score;
+			best_move = x;
 		}
 	}
 
@@ -44,7 +39,7 @@ int main(void)
 
 	if (ret == 0)
 	{
-		//fprintf(stderr, "Player turn: %d\n", grid.player_turn);
+		fprintf(stderr, "Player turn: %d\n", grid.player_turn);
 		if (grid.player_turn == TURN_PLAYER_B)
 		{
 			ret = recv_pos(&x);
@@ -63,7 +58,7 @@ int main(void)
 
 			send_pos(x);
 			place(&grid, x, GRID_PLAYER_A);
-			//print_grid(&grid);
+			print_grid(&grid);
 
 			ret = recv_pos(&x);
 			if (ret == 0)
