@@ -4,7 +4,7 @@
 
 #include "rush02.h"
 
-int		place(plateau *grid, int x, char player)
+int	place(plateau *grid, int x, char player)
 {
 	int	y;
 	int	pos;
@@ -18,7 +18,7 @@ int		place(plateau *grid, int x, char player)
 		{
 			pos = grid->x * y + x;
 			grid->tab[pos] = player;
-			//fprintf(stderr, "Placed %c at %u %u!\n", player, x, y);
+			//debug("Placed %c at %u %u!\n", player, x, y);
 		}
 		else
 			pos = -1;
@@ -28,7 +28,7 @@ int		place(plateau *grid, int x, char player)
 	return pos;
 }
 
-int		unplace(plateau *grid, int x)
+int	unplace(plateau *grid, int x)
 {
 	int	y;
 	int	pos;
@@ -42,7 +42,7 @@ int		unplace(plateau *grid, int x)
 		{
 			pos = grid->x * --y + x;
 			grid->tab[pos] = GRID_EMPTY;
-			//fprintf(stderr, "Deleted token at %u %u!\n", x, y);
+			//debug("Deleted token at %u %u!\n", x, y);
 		}
 		else
 			pos = -1;
@@ -55,11 +55,11 @@ int		unplace(plateau *grid, int x)
 
 void	print_grid(plateau *grid)
 {
-	fprintf(stderr, "Grid width: %u, height: %u, win-length: %u\n",
+	debug("Grid width: %u, height: %u, win-length: %u\n",
 		grid->x, grid->y, grid->win_length);
 
 	for (int y = grid->y - 1; y >= 0; y--)
-		fprintf(stderr, "%.*s|\n", grid->x, grid->tab + grid->x * y);
+		debug("%.*s|\n", grid->x, grid->tab + grid->x * y);
 }
 
 void	clear_grid(plateau *grid)

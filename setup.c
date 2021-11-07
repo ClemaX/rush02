@@ -22,7 +22,7 @@ int	setup(plateau *grid)
 	}
 	else
 	{
-		fprintf(stderr, "Invalid input!\n");
+		error("Invalid input!\n");
 		ret = 1;
 	}
 

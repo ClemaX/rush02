@@ -10,19 +10,24 @@
 #                                                                              #
 # **************************************************************************** #
 
-echo "#ifndef RUSH02_H"
-echo "# define RUSH02_H"
-echo "# include <unistd.h>"
-echo "# include <stdlib.h>"
+echo '#ifndef RUSH02_H'
+echo '# define RUSH02_H'
+echo ''
+echo '# include <unistd.h>'
+echo '# include <stdlib.h>'
+echo ''
+echo '# include "logger.h"'
+echo ''
 echo "# define GRID_EMPTY '_'"
 echo "# define GRID_PLAYER_A 'X'"
 echo "# define GRID_PLAYER_B 'O'"
-echo "# define TURN_PLAYER_A 1"
-echo "# define TURN_PLAYER_B 2"
-echo ""
-echo "# define BLOB_RESOLUTION 3"
 echo ''
-echo 'struct	plt
+echo '# define TURN_PLAYER_A 1'
+echo '# define TURN_PLAYER_B 2'
+echo ''
+echo '# define BLOB_RESOLUTION 3'
+echo ''
+echo 'typedef struct
 {
 	char	*tab;
 	int		x;
@@ -32,11 +37,13 @@ echo 'struct	plt
 	unsigned	player_turn;
 	unsigned	total_time;
 	unsigned	time_gain;
-} typedef plateau;
+}		plateau;
 '
-grep -h ^int *.c | sed -e 's/$/;/g' | sed -e 's/^int/int	/g'
+echo ''
+(grep -h ^int *.c | sed -e 's/$/;/g' | sed -e 's/^int/int	/g'
 grep -h ^char *.c | sed -e 's/$/;/g'
 grep -h ^void *.c | sed -e 's/$/;/g'
 grep -h ^size_t *.c | sed -e 's/$/;/g'
-grep -h ^plateau *.c | sed -e 's/$/;/g'
+grep -h ^plateau *.c | sed -e 's/$/;/g')
+echo ''
 echo "#endif"

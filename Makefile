@@ -13,12 +13,19 @@
 NAME=rush02
 SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
+HDR=rush02.h
+
+CFLAGS=-Werror -Wall -Wextra
+LDFLAGS=-Werror -Wall -Wextra
 
 $(NAME) : $(OBJ)
-	gcc -Werror -Wall -Wextra -o $(NAME) $(OBJ)
+	gcc $(LDFLAGS) -o $(NAME) $(OBJ)
 
-%o : %c
-	gcc -c -Werror -Wall -Wextra $<
+debug: CFLAGS+=-DDEBUG
+debug: fclean $(NAME)
+
+%o : %c $(HDR)
+	gcc -c $(CFLAGS) $<
 
 clean :
 	rm -f *.o
@@ -29,3 +36,5 @@ fclean : clean
 re : fclean $(NAME)
 
 .SUFFIXES:
+
+.PHONY: debug clean fclean re

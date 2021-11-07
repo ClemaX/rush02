@@ -14,34 +14,6 @@
 #include "stdio.h"
 #include <math.h>
 
-/* 
-int    place(plateau *grid, int x, char player)
-{
-    int	y;
-    int	pos;
-
-    for (y = 0; y < grid->y && grid->tab[grid->x * y + x] != GRID_EMPTY; y++)
-        ;
-
-    if (y < grid->y)
-    {
-        pos = grid->x * y + x;
-        grid->tab[pos] = player;
-        //fprintf(stderr, "Placed %c at %u %u!\n", player, x, y);
-    }
-    else
-        pos = -1;
-
-    return pos;
-}
-
-void    print_grid(plateau *grid)
-{
-    for (int y = grid->y - 1; y >= 0; y--)
-        fprintf(stderr, "%.*s|\n", grid->x, grid->tab + grid->x * y);
-} */
-
-
 int	void_sniper(plateau grille, int pos, int i, int j)
 {
 	int		x;

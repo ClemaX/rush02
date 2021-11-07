@@ -24,12 +24,12 @@ int	best_move(plateau *grid, char player, unsigned blob_resolution)
 	}
 
 	if (best_move == -1)
-		fprintf(stderr, "No move is possible anymore!\n");
+		error("No move is possible anymore!\n");
 
 	return best_move;
 }
 
-int main(void)
+int	main(void)
 {
 	plateau		grid;
 	int			ret;
@@ -45,7 +45,7 @@ int main(void)
 			blob_resolution = 2;
 		if (grid.x <= 7)
 			blob_resolution = 4;
-		fprintf(stderr, "Player turn: %d\n", grid.player_turn);
+		debug("Player turn: %d\n", grid.player_turn);
 		if (grid.player_turn == TURN_PLAYER_B)
 		{
 			ret = recv_pos(&x);
