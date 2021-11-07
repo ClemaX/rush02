@@ -6,7 +6,7 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:55:12 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/07 18:06:54 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 20:33:05 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	same_sniper(plateau grille, int pos, int i, int j)
 	x = pos % grille.x;
 	while (x + i < grille.x && x + i >= 0 && y + j < grille.y && y + j >= 0
 			&& grille.tab[(y + j) * grille.x + x + i] != joueur2
-			&& nb_cases < 4)
+			&& nb_cases < (int) grille.win_length - 1)
 	{
 		if (grille.tab[(y + j) * grille.x + x + i] == joueur)
 			nb_same++;
@@ -128,7 +128,9 @@ int	score_jeton(plateau grille, int pos)
 			{	
 				same_count = same_sniper(grille, pos, i, j);
 				same_count += same_sniper(grille, pos, i * -1, j * -1);
-				score_jeton += (10 + (void_count - 3) * 2) * pow(2, same_count);	
+				score_jeton += (10 + (void_count - 3) * 2) * pow(2, same_count);
+				if (same_count >= (int) grille.win_length)
+					score_jeton += 2000000;
 			}
 			j++;
 		}

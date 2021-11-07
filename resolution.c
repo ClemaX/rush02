@@ -6,7 +6,7 @@
 /*   By: iel-amra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 10:52:06 by iel-amra          #+#    #+#             */
-/*   Updated: 2021/11/07 19:11:54 by iel-amra         ###   ########lyon.fr   */
+/*   Updated: 2021/11/07 20:34:42 by iel-amra         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ int	blob(plateau grille, char joueur, int coups, int n)
 	if (pos != -1)
 		grille2.score = scorer(grille, grille2, pos);
 	else
-		return(-7000);
+		return (-4000000);
+	if (grille2.score > 1000000)
+		return (grille.score - 10);
+	else if (grille.score < -1000000)
+		return (grille.score + 10);
 	i = 0;
 	joueur2 = 167 - (int)joueur; // Inverse le code ascii des caracteres
 	score_pref = init_score_pref(joueur2);

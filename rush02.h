@@ -38,7 +38,7 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 int			place(plateau *grid, int x, char player);
 int			unplace(plateau *grid, int x);
-int		best_move(plateau *grid, char player);
+int		best_move(plateau *grid, char player, unsigned blob_resolution);
 int	 main(void);
 int			recv_pos(int *x);
 int			send_pos(int x);
