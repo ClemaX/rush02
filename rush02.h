@@ -11,13 +11,33 @@
 /* ************************************************************************** */
 #ifndef RUSH02_H
 # define RUSH02_H
-struct	plt
-{
-	char	*tab;
-	int		x;
-	int		y;
-	int		score;
-} typedef plateau;
 
-int	get_score(plateau grille, plateau grille2, int pos);
+# define GRID_EMPTY '_'
+# define GRID_PLAYER_A 'X'
+# define GRID_PLAYER_B 'O'
+
+typedef struct	plt
+{
+	char		*tab;
+	int			x;
+	int			y;
+	int			score;
+	unsigned	win_length;
+	unsigned	player_b_starts;
+	unsigned	total_time;
+	unsigned	time_gain;
+}				plateau;
+
+int		setup(plateau *grille);
+int		recv_pos(unsigned *x);
+int		send_pos(unsigned x);
+
+
+void	clear_grid(plateau *grille);
+void	print_grid(plateau *grille);
+int		place(plateau *grille, int x, char player);
+
+int		scorer(plateau grille, plateau grille2, int pos);
+
+
 #endif

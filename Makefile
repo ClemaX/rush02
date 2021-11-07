@@ -15,7 +15,7 @@ SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
-	gcc -o $(NAME) $(OBJ)
+	gcc -Werror -Wall -Wextra -o $(NAME) $(OBJ)
 
 %o : %c
 	gcc -c -Werror -Wall -Wextra $<

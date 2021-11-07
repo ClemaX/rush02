@@ -12,7 +12,8 @@
 
 #include "rush02.h"
 #include "libft.h"
-
+#include <limits.h>
+/* 
 plateau	init_tab(char *tab, int x, int y)
 {
 		plateau grille;
@@ -22,7 +23,7 @@ plateau	init_tab(char *tab, int x, int y)
 		grille.tab[x * y] = '\0'; 
 		ft_memset(grille.tab, '_', y);
 		return (grille);
-}
+} */
 
 plateau	clone(plateau grille)
 {
@@ -38,9 +39,9 @@ int	init_score_pref(char joueur)
 	int	score_pref;
 
 	if (joueur == 'X')
-		score_pref = -2147483648;
+		score_pref = INT_MIN;
 	else
-		score_pref = 2147483647;
+		score_pref = INT_MAX;
 	return (score_pref);
 }
 
@@ -60,13 +61,12 @@ int	blob(plateau grille, char joueur, int coups)
 		if (coups > 1)
 		{
 			grille2 = clone(grille);
-			if (placable(i, grille2))
-				placer(i, grille2, joueur);
+			place(&grille2, i, joueur);
 			score = blob(grille2, joueur2, coups - 1);
 			free(grille2.tab);
 		}
 		else
-			score = get_score(grille, grille2, i);
+			score = scorer(grille, grille2, i);
 		i++;
 
 		if (joueur == 'X' && score_pref < score)

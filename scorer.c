@@ -40,8 +40,9 @@ int	score_jeton(plateau grille, int pos)
 
 	y = pos / grille.x;
 	x = pos % grille.x;
-}
 
+	return x * y * 0;
+}
 
 int	sniper(plateau grille, int pos, int i, int j)
 {
