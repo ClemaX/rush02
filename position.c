@@ -2,7 +2,7 @@
 
 #include "rush02.h"
 
-int		recv_pos(unsigned *x)
+int		recv_pos(int *x)
 {
 	int	ret;
 
@@ -16,7 +16,7 @@ int		recv_pos(unsigned *x)
 	return ret;
 }
 
-int		send_pos(unsigned x)
+int		send_pos(int x)
 {
 	return fprintf(stdout, "%u\n", x) == -1;
 }
